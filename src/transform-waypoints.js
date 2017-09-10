@@ -31,34 +31,7 @@ const segments_reducer = ({
 
 const segments_to_categories = segments => segments.reduce(segments_reducer, {})
 
-const make_transform_waypoints = calculate_distance => waypoints => {
-	const segments = make_waypoints_to_segments(calculate_distance)(waypoints)
-	return segments_to_categories(segments)
+module.exports = {
+	make_waypoints_to_segments,
+	segments_to_categories,
 }
-
-module.exports = make_transform_waypoints
-
-
-/*
-const make_transform_waypoints = calculate_distance => waypoints => {
-	const waypoints_with_date = waypoints
-		.map(x => Object.assign({}, x, { date: new Date(x.timestamp) }))
-
-	const segments = waypoints_with_date
-		.slice(1, waypoints_with_date.length)
-		.reduce((acc, x) => ({
-			previous: x,
-			result: acc.result.concat({
-				duration: x.date - acc.previous.date,
-				distance: calculate_distance(x.position, acc.previous.position),
-				is_speeding: x.speed > x.speed_limit,
-			}),
-		}), {
-			previous: waypoints_with_date[0],
-			result: []
-		})
-		.result
-	
-	return segments.reduce(segments_reducer, {})
-}
-*/

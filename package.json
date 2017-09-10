@@ -4,8 +4,13 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "test": "tape 'src/**/*.test.js' | tap-diff"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tap-diff": "^0.1.1",
+    "tape": "^4.8.0"
+  }
 }
